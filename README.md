@@ -51,7 +51,10 @@ It is convieniet to run **predict_deep.py** directly to check the precision of t
 
 ### Building the docker image
 **cd** to the project directory *mnist_predict*, using -t to provide a friendly name
+
 ``` docker build -t mnist_predict . ```
+
+run `docker image ls` see if it has been created.
 
 > ### Troubleshooting
 >- Never forget there is a `.` behind image name, otherwise it will report bug.
@@ -59,7 +62,16 @@ It is convieniet to run **predict_deep.py** directly to check the precision of t
 
 ### Starting a cassandra server instance
 ``` docker run --name project-cassandra -p 9042:9042 -d cassandra:latest ```
->- -p port expose and connect, -d run process in background
+
+- -p port expose and connect, -d run process in background
+
+### Running the container
+```docker run --name test -p 4000:80 --rm mnist_predict```
+- container name: test, image used: mnist_predict, port:4000->80, --rm remove the old version after finishing process
+
+> ### Troubleshooting 
+>- #### Cannot connect to Cassandra
+
 
 
 
