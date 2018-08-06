@@ -87,9 +87,9 @@ run `docker image ls` see if it has been created.
 1. #### Directly opening with Browser
 	go to page **http://localhost:4000/uploads**
 	##### Show the image you just uploaded
-		go to page **http://localhost:4000/uploads/xxx.png**
+	go to page **http://localhost:4000/uploads/xxx.png**
 	##### Record the data manually
-		go to page **http://localhost:4000/uploads/record**
+	go to page **http://localhost:4000/uploads/record**
 2. #### Using *curl* on command line
 
 	`curl -F "file=@/home/usrname/Documents/image.png" http://localhost:4000/uploads`
