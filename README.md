@@ -14,8 +14,8 @@ use trained mnist model to predict number from user input image through Flask se
 --------------------------------------------------------------------------------------------------------------------------
 
 ## Package Dependencies
-- Docker (The whole project will be running in the docker container)
-- Cassandra (NoSQL type database)
+- *Docker* (The whole project will be running in the docker container)
+- *Cassandra* (NoSQL type database)
 
 ## MNIST MODEL 
 There is already exists an tranied mnist model which has been trained 70,000 times (Path: *mnist_predict/mnist_model/trained_model*)
@@ -23,11 +23,13 @@ The train-data-set is already in the directory
 ### Continuing training model
 If you are not satisfied with the accuracy of the model, you can always continue to train it.
 - FILE: mnist_predict/mnist_model/**mnist_deep_continue.py**
+
 `python mnist_deep_continue.py`
 
 ### Initialising model
 If you want to start your own train loop or creat new model, please use following"
 - FILE: mnist_predict/mnist_model/**mnist_deep_creat.py**
+
 `python mnist_deep_creat.py`
 
 #### Creating an image file
@@ -36,8 +38,11 @@ You have to create a PNG file that contains a handwritten number. The background
 ### Try directly predict number
 The easiest way again is to put the image file in the same directory as the python scripts and cd to the directory where the python files are located. (Path: mnist_predict/**predict_deep.py**)
 The predict scripts require one argument: the file location of the image file containing the handwritten number. For example when the image file is ‘xxx.png’ and is in the same location as the script, run:
+
 `python predict_deep.py xxx.png`
+
 It is convieniet to run **predict_deep.py** directly to check the precision of the *mnist_model*, and add any change before build docker image.
+
 --------------------------------------------------------------------------------------------------------------------------
 
 ## Building the docker image
