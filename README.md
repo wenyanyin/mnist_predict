@@ -63,11 +63,13 @@ run `docker image ls` see if it has been created.
 ### Starting a cassandra server instance
 ``` docker run --name project-cassandra -p 9042:9042 -d cassandra:latest ```
 
-- -p port expose and connect, -d run process in background
+- -p port expose and connect, -d run process in background (detached mode)
 
 ### Running the container
 ```docker run --name test -p 4000:80 --rm -d mnist_predict```
 - container name: test, image used: mnist_predict, port:4000->80, --rm remove the old version after finishing process
+- mapping your machine’s port 4000 to the container’s published port 80 
+** Hit CTRL+C in your terminal to quit. **
 
 > ### Troubleshooting 
 > #### Cannot connect to Cassandra
@@ -75,11 +77,53 @@ run `docker image ls` see if it has been created.
 >- If Yes, then run `python database_connect.py xxx.png xxx` (two arguments required) see if it is working. 
 >> 	If NO, change *data_connect.py* line 19, the value of contact_points ('172.17.0.2') to your local machine IP (normarlly '127.0.0.1')
 > 	find your local host by command `docker-machine ip` 
->>then run `python database_connect.py xxx.png xxx` again
+>>then run `python database_connect.py xxx.png xxx` again. 
 >> 	if it is still not working, somewhere else is wrong.
 >- It is working now, the file itself is ok, but you have to connect it with the docker container (*project-cassandra*) 
 > 	use `docker inspect -f '{{ .NetworkSettings.IPAddress }}' project-cassandra` 
-> 	to find your container (*project-cassandra*) IP Address, copy it to the value of 
+> 	to find your container (*project-cassandra*) IP Address, copy it to the value of contact_points.
+
+### Two ways to upload user handwriting image
+1. #### Directly opening with Browser
+	go to page **http://localhost:4000/uploads**
+	##### Show the image you just uploaded
+		go to page **http://localhost:4000/uploads/xxx.png**
+	##### Record the data manually
+		go to page **http://localhost:4000/uploads/record**
+2. #### Using *curl* on command line
+
+	`curl -F "file=@/home/usrname/Documents/image.png" http://localhost:4000/uploads`
+
+> ### Troubleshooting
+>- If `http://localhost` is not working, please use Docker machine IP instead of `http://localhost`
+> 	> e.g. `http://127.0.0.1:4000`
+
+## Checking your message
+#### Opening **cqlsh**
+
+``` docker run -it --link project-cassandra:cassandra --rm cassandra cqlsh cassandra ```
+
+#### Inside Keyspace, search table info
+
+``` cqlsh> use mnistpredict;
+	cqlsh:mnistpredict> select*from mnistable;
+```
+
+> ### Trouble shooting
+>- Never forget `;` at the end, otherwise the process will not stop 
+
+## Command Summary
+For quick command running and searching purpose
+
+```
+docker build -t mnist_predict .
+docker run --name project-cassandra -p 9042:9042 -d cassandra:latest
+docker run --name test -p 4000:80 --rm -d mnist_predict
+curl -F "file=@/home/usrname/Documents/image.png" http://localhost:4000/uploads
+docker run -it --link project-cassandra:cassandra --rm cassandra cqlsh cassandra
+use mnistpredict;
+select*from mnistable;
+```
 
 
 
