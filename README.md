@@ -66,11 +66,15 @@ run `docker image ls` see if it has been created.
 - -p port expose and connect, -d run process in background
 
 ### Running the container
-```docker run --name test -p 4000:80 --rm mnist_predict```
+```docker run --name test -p 4000:80 --rm -d mnist_predict```
 - container name: test, image used: mnist_predict, port:4000->80, --rm remove the old version after finishing process
 
 > ### Troubleshooting 
->- #### Cannot connect to Cassandra
+> #### Cannot connect to Cassandra
+>- First of all, run `docker ps` see if cassandra has been running *project-cassandra*
+>>- If Yes, then run `python database_connect.py xxx.png xxx` (two arguments required) see if it is working. 
+>>> 	If NO, change *data_connect.py* line 19, the value of contact_points ('172.17.0.2') to your local machine IP, find your local host by command `docker-machine ip` then run `python database_connect.py xxx.png xxx` again
+
 
 
 
