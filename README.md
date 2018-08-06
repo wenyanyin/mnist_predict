@@ -19,6 +19,7 @@ use trained mnist model to predict number from user input image through Flask se
 
 ## MNIST MODEL 
 There is already exists an tranied mnist model which has been trained 70,000 times (Path: *mnist_predict/mnist_model/trained_model*)
+
 The train-data-set is already in the directory
 ### Continuing training model
 If you are not satisfied with the accuracy of the model, you can always continue to train it.
@@ -37,6 +38,7 @@ You have to create a PNG file that contains a handwritten number. The background
 
 ### Try directly predict number
 The easiest way again is to put the image file in the same directory as the python scripts and cd to the directory where the python files are located. (Path: mnist_predict/**predict_deep.py**)
+
 The predict scripts require one argument: the file location of the image file containing the handwritten number. For example when the image file is ‘xxx.png’ and is in the same location as the script, run:
 
 `python predict_deep.py xxx.png`
@@ -45,25 +47,20 @@ It is convieniet to run **predict_deep.py** directly to check the precision of t
 
 --------------------------------------------------------------------------------------------------------------------------
 
-## Building the docker image
+## Running in the docker container
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+### Building the docker image
+**cd** to the project directory *mnist_predict*, using -t to provide a friendly name
+``` docker build -t mnist_predict . ```
 
 > ### Troubleshooting
+>- Never forget there is a `.` behind image name, otherwise it will report bug.
+>- Notice that inside **Dockerfile**, the resource of `pip install` was using *pypi.tuna.tsinghua.edu.cn/simple*, because of the Chinese Internet protocols (GFW). Instead, if you are out of mainland China, you can feel free to change it to the original source *pypi.python.org* in case it is too slow or readtime out and failed.
+
+### Starting a cassandra server instance
+``` docker run --name project-cassandra -p 9042:9042 -d cassandra:latest ```
+>- -p port expose and connect, -d run process in background
+
 
 
 
