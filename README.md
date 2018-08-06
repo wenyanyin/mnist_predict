@@ -72,8 +72,14 @@ run `docker image ls` see if it has been created.
 > ### Troubleshooting 
 > #### Cannot connect to Cassandra
 >- First of all, run `docker ps` see if cassandra has been running *project-cassandra*
->>- If Yes, then run `python database_connect.py xxx.png xxx` (two arguments required) see if it is working. 
->>> 	If NO, change *data_connect.py* line 19, the value of contact_points ('172.17.0.2') to your local machine IP, find your local host by command `docker-machine ip` then run `python database_connect.py xxx.png xxx` again
+>- If Yes, then run `python database_connect.py xxx.png xxx` (two arguments required) see if it is working. 
+>> 	If NO, change *data_connect.py* line 19, the value of contact_points ('172.17.0.2') to your local machine IP (normarlly '127.0.0.1')
+> 	find your local host by command `docker-machine ip` 
+>>then run `python database_connect.py xxx.png xxx` again
+>> 	if it is still not working, somewhere else is wrong.
+>- It is working now, the file itself is ok, but you have to connect it with the docker container (*project-cassandra*) 
+> 	use `docker inspect -f '{{ .NetworkSettings.IPAddress }}' project-cassandra` 
+> 	to find your container (*project-cassandra*) IP Address, copy it to the value of 
 
 
 
