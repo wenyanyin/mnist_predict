@@ -20,7 +20,12 @@ use trained mnist model to predict number from user input image through Flask se
 ## MNIST MODEL 
 There is already exists an tranied mnist model which has been trained 70,000 times (Path: *mnist_predict/mnist_model/trained_model*)
 
-The train-data-set is already in the directory
+The train-data-set is already in the directory (4 files)
+>- train-images-idx3-ubyte.gz
+>- train-labels-idx1-ubyte
+>- t10k-images-idx3-ubyte
+>- t10k-labels-idx1-ubyte
+
 ### Continuing training model
 If you are not satisfied with the accuracy of the model, you can always continue to train it.
 - FILE: mnist_predict/mnist_model/**mnist_deep_continue.py**
