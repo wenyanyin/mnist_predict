@@ -1,5 +1,5 @@
 # mnist_predict
-use trained mnist model to predict number from user input image through Flask service and store image data in database
+This project use trained mnist model to predict number from user input image through Flask service and store image data in database
 
 ## Overview
 1. Creating the tranied MNIST model.
